@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epic7dle</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 Epic7dle</h1>
+            <div class="streak-container">
+                🔥 <span id="current-streak">0</span>
+                <div class="tooltip">Días consecutivos acertando</div>
+            </div>
+        </div>
+        
+        <div id="grid">
+            <div class="grid-header">
+                <div>Imagen</div>
+                <div>Rareza</div>
+                <div>Rol</div>
+                <div>Elemento</div>
+                <div>Zodiaco</div>
+                <div>Género</div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="guess-input" placeholder="Nombre del héroe" autocomplete="off">
+            <button onclick="submitGuess()">Adivinar</button>
+        </div>
+        
+        <div class="autocomplete-container">
+            <div id="autocomplete-list" class="autocomplete-items"></div>
+        </div>
+        
+        <div id="yesterday-champion"></div>
+        <div id="result"></div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

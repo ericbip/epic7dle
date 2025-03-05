@@ -1,0 +1,272 @@
+body {
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #e67e22;
+    margin: 0;
+}
+
+.streak-container {
+    position: relative;
+    background: #d35400;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: help;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 160px;
+    background: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 14px;
+}
+
+.streak-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+#grid {
+    margin: 20px 0;
+}
+
+.grid-header {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    padding: 15px;
+    background: #2c3e50;
+    border-radius: 8px;
+}
+
+.grid-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.grid-cell {
+    padding: 15px;
+    border: 2px solid #34495e;
+    border-radius: 8px;
+    text-align: center;
+    background: #2c3e50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+}
+
+.character-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid #e67e22;
+}
+
+.autocomplete-container {
+    position: relative;
+    width: 100%;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 2px solid #e67e22;
+    border-radius: 8px;
+    background: #2c3e50;
+    z-index: 999;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 5px;
+    display: none;
+}
+
+.autocomplete-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.autocomplete-item:hover {
+    background: #34495e;
+}
+
+.autocomplete-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 15px;
+    border: 1px solid #e67e22;
+    object-fit: cover;
+}
+
+.autocomplete-item span {
+    color: #fff;
+    font-size: 16px;
+}
+
+.input-group {
+    display: flex;
+    gap: 15px;
+    margin: 30px 0;
+    position: relative;
+}
+
+#guess-input {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #e67e22;
+    border-radius: 8px;
+    background: #2c3e50;
+    color: #fff;
+    font-size: 16px;
+}
+
+button {
+    padding: 15px 30px;
+    background: #e67e22;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background: #d35400;
+    transform: translateY(-2px);
+}
+
+#result {
+    text-align: center;
+    font-size: 18px;
+    padding: 20px;
+    border-radius: 8px;
+    background: #34495e;
+    margin-top: 20px;
+}
+
+#yesterday-champion {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 16px;
+    color: #95a5a6;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .grid-header, .grid-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .grid-cell {
+        font-size: 14px;
+        padding: 10px;
+        min-height: 60px;
+    }
+    
+    .character-image {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .autocomplete-item img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* Iconos generales */
+.element-icon,
+.role-icon,
+.zodiac-icon {
+    width: 32px;
+    height: 32px;
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+/* Eliminar la sección de ajustes para móviles */
+@media (max-width: 768px) {
+    /* Quitar estos ajustes */
+    .element-icon,
+    .role-icon,
+    .zodiac-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    /* Mantener otros ajustes móviles */
+    .header {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .grid-header, .grid-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .grid-cell {
+        font-size: 14px;
+        padding: 10px;
+        min-height: 60px;
+    }
+    
+    .character-image {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .autocomplete-item img {
+        width: 30px;
+        height: 30px;
+    }
+}
