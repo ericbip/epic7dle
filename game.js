@@ -2973,64 +2973,75 @@ function revealClues(hero) {
         
         switch(prop.type) {
             case 'image':
-                const imgContainer = document.createElement('div');
-                const img = document.createElement('img');
-                img.src = prop.value;
-                img.alt = prop.alt;
-                img.className = 'character-image';
-                img.onerror = () => {
-                    img.style.display = 'none';
-                    const fallback = document.createElement('div');
-                    fallback.textContent = prop.alt;
-                    fallback.style.color = '#e67e22';
-                    imgContainer.appendChild(fallback);
-                };
-                imgContainer.appendChild(img);
-                cell.appendChild(imgContainer);
-                break;
+				const imgContainer = document.createElement('div');
+				const img = document.createElement('img');
+				img.src = prop.value;
+				img.alt = prop.alt;
+				img.className = 'character-image';
+				
+				// Eliminar cualquier estilo de borde o fondo
+				img.style.border = 'none';
+				img.style.background = 'transparent';
+				
+				img.onerror = () => {
+					img.style.display = 'none';
+					const fallback = document.createElement('div');
+					fallback.textContent = prop.alt;
+					fallback.style.color = '#e67e22';
+					imgContainer.appendChild(fallback);
+				};
+				imgContainer.appendChild(img);
+				cell.appendChild(imgContainer);
+				
+				// Evitar que herede estilos de otras celdas
+				cell.style.background = 'transparent';
+				cell.style.border = 'none';
+				break;
                 
             case 'element':
-                cell.className += ' icon-cell';
-                cell.setAttribute('data-element', prop.value);
-                const elementImg = document.createElement('img');
-                elementImg.src = elementImages[prop.value];
-                elementImg.className = 'element-icon';
-                elementImg.onerror = () => elementImg.style.display = 'none';
-                cell.appendChild(elementImg);
-                cell.innerHTML += ` ${prop.value.charAt(0).toUpperCase() + prop.value.slice(1)}`;
-                break;
+				cell.setAttribute('data-tooltip', prop.value.charAt(0).toUpperCase() + prop.value.slice(1));
+				cell.className += ' icon-cell';
+				cell.setAttribute('data-element', prop.value);
+				const elementImg = document.createElement('img');
+				elementImg.src = elementImages[prop.value];
+				elementImg.className = 'element-icon';
+				elementImg.title = prop.value.charAt(0).toUpperCase() + prop.value.slice(1); // Tooltip
+				elementImg.onerror = () => elementImg.style.display = 'none';
+				cell.appendChild(elementImg);
+				break;
                 
             case 'role':
-                cell.className += ' icon-cell';
-                cell.setAttribute('data-role', prop.value);
-                const roleImg = document.createElement('img');
-                roleImg.src = roleImages[prop.value];
-                roleImg.className = 'role-icon';
-                roleImg.onerror = () => roleImg.style.display = 'none';
-                cell.appendChild(roleImg);
-                cell.innerHTML += ` ${prop.value.charAt(0).toUpperCase() + prop.value.slice(1)}`;
-                break;
-                
-            case 'zodiac':
-                cell.className += ' icon-cell';
-                const zodiacImg = document.createElement('img');
-                zodiacImg.src = zodiacImages[prop.value];
-                zodiacImg.className = 'zodiac-icon';
-                zodiacImg.onerror = () => zodiacImg.style.display = 'none';
-                cell.appendChild(zodiacImg);
-                cell.innerHTML += ` ${prop.value.charAt(0).toUpperCase() + prop.value.slice(1)}`;
-                break;
+				cell.setAttribute('data-tooltip', prop.value.charAt(0).toUpperCase() + prop.value.slice(1));
+				cell.className += ' icon-cell';
+				cell.setAttribute('data-role', prop.value);
+				const roleImg = document.createElement('img');
+				roleImg.src = roleImages[prop.value];
+				roleImg.className = 'role-icon';
+				roleImg.title = prop.value.charAt(0).toUpperCase() + prop.value.slice(1); // Tooltip
+				roleImg.onerror = () => roleImg.style.display = 'none';
+				cell.appendChild(roleImg);
+				break;
+
+			case 'zodiac':
+				cell.setAttribute('data-tooltip', prop.value.charAt(0).toUpperCase() + prop.value.slice(1));
+				cell.className += ' icon-cell';
+				const zodiacImg = document.createElement('img');
+				zodiacImg.src = zodiacImages[prop.value];
+				zodiacImg.className = 'zodiac-icon';
+				zodiacImg.title = prop.value.charAt(0).toUpperCase() + prop.value.slice(1); // Tooltip
+				zodiacImg.onerror = () => zodiacImg.style.display = 'none';
+				cell.appendChild(zodiacImg);
+				break;
                 
             default:
                 cell.textContent = prop.value;
         }
 
         if (prop.value === prop.target) {
-            cell.classList.add('partial');
-            cell.innerHTML += ' ✅';
-        } else if (prop.type !== 'image') {
-            cell.innerHTML += ' ❌';
-        }
+			cell.classList.add('correct-bg');
+		} else {
+			cell.classList.add('incorrect-bg');
+		}
         
         row.appendChild(cell);
     });

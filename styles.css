@@ -115,7 +115,18 @@ h1 {
     height: 80px;
     object-fit: cover;
     border-radius: 6px;
-    border: 2px solid #e67e22;
+}
+
+.grid-cell:first-child { /* Afecta solo a la primera columna (Imagen) */
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.grid-header > div:first-child,
+.grid-row > div:first-child {
+    justify-content: center !important;
+    padding: 5px !important;
 }
 
 .autocomplete-container {
@@ -284,4 +295,64 @@ button:hover {
         width: 30px;
         height: 30px;
     }
+}
+
+/* Tooltips personalizados */
+.icon-cell {
+    position: relative;
+}
+
+.icon-cell:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2c3e50;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Flecha del tooltip */
+.icon-cell:hover::before {
+    content: "";
+    position: absolute;
+    bottom: calc(100% - 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #2c3e50 transparent transparent transparent;
+}
+
+/* estilos para aciertos/errores */
+.correct-bg {
+    background: #27ae60 !important; /* Verde */
+    color: white !important;
+}
+
+.incorrect-bg {
+    background: #e74c3c !important; /* Rojo */
+    color: white !important;
+}
+
+/* Eliminar estilos antiguos de partial */
+.partial {
+    background: inherit !important;
+    color: inherit !important;
+}
+
+.character-image {
+    transition: transform 0.2s;
+    transform-origin: center; /* Para que el zoom sea desde el centro */
+}
+
+.character-image:hover {
+    transform: scale(1.1);
 }
